@@ -1,0 +1,21 @@
+{
+    "name": "alexsers/articles-module",
+    "description": "Articles Module",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","articles"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Alexandr Syrovatskii",
+            "email": "alexandr-syrovatskii@yandex.ru"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "alexsers\\articles\\": ""
+        }
+    }
+}
