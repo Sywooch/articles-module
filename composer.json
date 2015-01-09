@@ -17,5 +17,8 @@
         "psr-4": {
             "alexsers\\articles\\": ""
         }
+    },
+    "extra": {
+        "bootstrap": "alexsers\\articles\\Bootstrap"
     }
 }
