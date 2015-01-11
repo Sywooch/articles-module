@@ -6,12 +6,10 @@ namespace alexsers\articles;
  * Class Module
  * @package alexsers\articles
  */
-class Module extends \yii\base\Module
+class Module extends \alexsers\base\components\Module
 {
-    /**
-     * @var string
-     */
-    public $controllerNamespace = 'alexsers\articles\controllers\frontend';
+
+    public static $name = 'articles';
 
     /**
      * @var int Articles per page
@@ -42,42 +40,4 @@ class Module extends \yii\base\Module
      * @var string Files URL
      */
     public $contentUrl = '/statics/articles/content';
-
-    /**
-     * @var boolean Whether module is used for backend or not
-     */
-    protected $_isBackend;
-
-    public function run()
-    {
-        return "Hello!";
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        parent::init();
-
-        if ($this->getIsBackend() === true) {
-            $this->setViewPath('@alexsers/articles/views/backend');
-        } else {
-            $this->setViewPath('@alexsers/articles/views/frontend');
-        }
-    }
-
-    /**
-     * Check if module is used for backend application.
-     *
-     * @return boolean true if it's used for backend application
-     */
-    public function getIsBackend()
-    {
-        if ($this->_isBackend === null) {
-            $this->_isBackend = strpos($this->controllerNamespace, 'backend') === false ? false : true;
-        }
-
-        return $this->_isBackend;
-    }
 }

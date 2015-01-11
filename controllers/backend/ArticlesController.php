@@ -2,7 +2,7 @@
 
 namespace alexsers\articles\controllers\backend;
 
-use backend\components\Controller;
+use alexsers\base\components\backend\Controller;
 use alexsers\articles\models\backend\Articles;
 use alexsers\articles\models\backend\ArticlesCategory;
 use alexsers\articles\models\backend\ArticlesSearch;
@@ -192,7 +192,8 @@ class ArticlesController extends Controller
     /**
      * Поиск статьи по id
      * @param $id
-     * @throws HttpException
+     * @return static|static[]
+     * @throws \yii\web\HttpException
      */
     protected function findModel($id)
     {

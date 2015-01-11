@@ -12,18 +12,18 @@ use yii\behaviors\TimestampBehavior;
 
 /**
  * Class Article
- * @package backend\models
+ * @package alexsers\articles\models\backend
  * Article model.
  *
- * @property integer $id ID
- * @property string $title Title
- * @property string $alias Alias
- * @property string $snippet Intro text
- * @property string $content Content
- * @property integer $views Views
- * @property integer $status_id Status
- * @property integer $created_at Created time
- * @property integer $updated_at Updated time
+ * @property integer $id ИД
+ * @property string $title Заголовок
+ * @property string $alias Псевдоним
+ * @property string $snippet Краткое содержание
+ * @property string $content Контент
+ * @property integer $views Просмотры
+ * @property integer $status_id Статус
+ * @property integer $created_at Дата создания
+ * @property integer $updated_at Дата обновления
  */
 class Articles extends \alexsers\articles\models\Articles
 {
@@ -72,17 +72,21 @@ class Articles extends \alexsers\articles\models\Articles
     }
 
     /**
-     * @return string Readable blog status
+     * Читаемый статус статьи
+     * @return mixed || null
      */
     public function getStatus()
     {
-        $statuses = self::getStatusArray();
-
-        return $statuses[$this->status_id];
+        if($statuses = self::getStatusArray()){
+            return $statuses[$this->status_id];
+        }else{
+            return null;
+        }
     }
 
     /**
-     * @return array Status array.
+     * Массив статусов
+     * @return array
      */
     public static function getStatusArray()
     {
@@ -93,6 +97,7 @@ class Articles extends \alexsers\articles\models\Articles
     }
 
     /**
+     * Категория статьи
      * @return \yii\db\ActiveQuery
      */
     public function getCategory()

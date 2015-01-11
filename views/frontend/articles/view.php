@@ -42,7 +42,7 @@ $this->params['breadcrumbs'] = [
 
 
 
-                <?= \frontend\widgets\comment\Comment::widget(
+                <?= \alexsers\comments\widgets\comment\Comment::widget(
                     [
                         'model' => $model,
                         'jsOptions' => [

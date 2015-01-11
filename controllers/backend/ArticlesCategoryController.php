@@ -2,7 +2,7 @@
 
 namespace alexsers\articles\controllers\backend;
 
-use backend\components\Controller;
+use alexsers\base\components\backend\Controller;
 use alexsers\articles\models\backend\ArticlesCategory;
 use alexsers\articles\models\backend\ArticlesCategorySearch;
 use Yii;
@@ -12,7 +12,7 @@ use yii\web\Response;
 use yii\widgets\ActiveForm;
 
 /**
- * Контроллер управления категорий статей
+ * Контроллер управления категориями статей
  * @package backend\controllers
  */
 class ArticlesCategoryController extends Controller
@@ -160,7 +160,8 @@ class ArticlesCategoryController extends Controller
     /**
      * Поиск категории по ID
      * @param $id
-     * @throws HttpException
+     * @return static|static[]
+     * @throws \yii\web\HttpException
      */
     protected function findModel($id)
     {

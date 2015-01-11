@@ -5,33 +5,37 @@ namespace alexsers\articles\models\frontend;
 use Yii;
 
 /**
- * Class Articless
- * Articles model.
+ * Статьи
+ * Class Articles
+ * @package alexsers\articles\models\frontend
  *
- * @property integer $id ID
- * @property string $title Title
- * @property string $alias Alias
- * @property string $snippet Intro text
- * @property string $content Content
- * @property integer $views Views
- * @property integer $status_id Status
- * @property integer $created_at Created time
- * @property integer $updated_at Updated time
+ * @property integer $id ИД
+ * @property string $title Заголовок
+ * @property string $alias Псевдоним
+ * @property string $snippet Краткое содержание
+ * @property string $content Контент
+ * @property integer $views Просмотры
+ * @property integer $status_id Статус
+ * @property integer $created_at Дата создания
+ * @property integer $updated_at Дата обновления
  */
 class Articles extends \alexsers\articles\models\Articles
 {
     /**
-     * @var string Created date
+     * Дата создания
+     * @var string
      */
     private $_created;
 
     /**
-     * @var string Updated date
+     * Дата обновления
+     * @var string
      */
     private $_updated;
 
     /**
-     * @return string Created date
+     * Дата создания
+     * @return string
      */
     public function getCreated()
     {
@@ -42,7 +46,8 @@ class Articles extends \alexsers\articles\models\Articles
     }
 
     /**
-     * @return string Updated date
+     * Дата обновления
+     * @return string
      */
     public function getUpdated()
     {

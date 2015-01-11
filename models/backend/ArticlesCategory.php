@@ -10,7 +10,8 @@ use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "articles_category".
+ * Class ArticlesCategory
+ * @package alexsers\articles\models\backend
  *
  * @property integer $id
  * @property string $title
@@ -28,25 +29,22 @@ class ArticlesCategory extends \alexsers\articles\models\ArticlesCategory
 {
 
     /**
-     * @var Читабельный статус категории
+     * Читаемый статус категории
+     * @var
      */
     protected $_categoryList;
 
     /**
-     * @var string Model status.
-     */
-    private $_status;
-
-    /**
-     * @return string Model status.
+     * Читаемый статус котегории
+     * @return mixed || null
      */
     public function getStatus()
     {
-        if ($this->_status === null) {
-            $statuses = self::getStatusArray();
-            $this->_status = $statuses[$this->status_id];
+        if($statuses = self::getStatusArray()){
+            return $statuses[$this->status_id];
+        }else{
+            return null;
         }
-        return $this->_status;
     }
 
     /**
@@ -61,7 +59,7 @@ class ArticlesCategory extends \alexsers\articles\models\ArticlesCategory
     }
 
     /**
-     * Читабельный статус котегории
+     * Упорядоченный массив категорий
      * @return mixed
      */
     public function getCategoryList()
@@ -77,6 +75,7 @@ class ArticlesCategory extends \alexsers\articles\models\ArticlesCategory
     }
 
     /**
+     * Массив категорий
      * @param null $parent_id
      * @param int $level
      * @return array

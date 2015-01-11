@@ -5,10 +5,10 @@ namespace alexsers\articles\controllers\frontend;
 use alexsers\articles\models\frontend\Articles;
 use alexsers\articles\models\frontend\ArticlesCategory;
 use alexsers\users\models\User;
-use frontend\models\Comments;
+use alexsers\base\components\frontend\Controller;
+use alexsers\comments\models\frontend\Comments;
 use Yii;
 use yii\web\Cookie;
-use yii\web\Controller;
 use yii\web\HttpException;
 use yii\data\ActiveDataProvider;
 
@@ -40,6 +40,8 @@ class ArticlesController extends Controller
     }
 
     /**
+     * Вывод статей по категории
+     * @param $category
      * @return string
      */
     function actionCategory($category)
@@ -62,6 +64,7 @@ class ArticlesController extends Controller
     }
 
     /**
+     * Просмотр статьи
      * @param $alias
      * @return string
      * @throws \yii\web\HttpException
@@ -87,10 +90,10 @@ class ArticlesController extends Controller
             throw new HttpException(404);
         }
     }
+
     /**
-     * Update blog views counter.
-     *
-     * @param Articles $model Model
+     * Обновление просмотров статьи
+     * @param $model
      */
     protected function counter($model)
     {

@@ -4,9 +4,9 @@ namespace alexsers\articles\models\backend;
 use yii\db\ActiveQuery;
 
 /**
- * Class CategoryQuery
- * @package common\modules\blogs\models\query
- * Класс кастомных запросов модели [[Category]]
+ * Класс кастомных запросов
+ * Class ArticlesCategoryQuery
+ * @package alexsers\articles\models\backend
  */
 class ArticlesCategoryQuery extends ActiveQuery
 {

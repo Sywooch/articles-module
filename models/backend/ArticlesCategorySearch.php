@@ -8,7 +8,8 @@ use yii\data\ActiveDataProvider;
 
 /**
  * Поиск для модели ArticlesCategory
- * @package backend\models\search
+ * Class ArticlesCategorySearch
+ * @package alexsers\articles\models\backend
  */
 class ArticlesCategorySearch extends ArticlesCategory
 {
