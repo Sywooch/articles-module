@@ -1,8 +1,9 @@
 <?php
 
+use alexsers\articles\Module;
 use yii\widgets\ListView;
 
-$this->title = Yii::t('frontend', 'Статьи');
+$this->title = Module::t('articles', 'Статьи');
 $this->params['breadcrumbs'][] = ' / ' . $this->title;
 ?>
 

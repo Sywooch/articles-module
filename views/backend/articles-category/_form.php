@@ -1,5 +1,6 @@
 <?php
 
+use alexsers\articles\Module;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -25,7 +26,7 @@ use yii\widgets\ActiveForm;
 <div class="row">
     <div class="col-sm-12">
         <?= $form->field($model, 'parent_id')->dropDownList($categoryList, [
-            'prompt' => Yii::t('backend', 'Выберите категорию')
+            'prompt' => Module::t('articles', 'Выберите категорию')
         ]) ?>
     </div>
 </div>
@@ -33,7 +34,7 @@ use yii\widgets\ActiveForm;
 <?php $box->endBody(); ?>
 <?php $box->beginFooter(); ?>
 <?= Html::submitButton(
-    $model->isNewRecord ? Yii::t('backend', 'Сохранить') : Yii::t('backend','Обновить'),
+    $model->isNewRecord ? Module::t('articles', 'Сохранить') : Module::t('articles','Обновить'),
     [
         'class' => $model->isNewRecord ? 'btn btn-primary btn-large' : 'btn btn-success btn-large'
     ]

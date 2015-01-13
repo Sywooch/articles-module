@@ -2,6 +2,7 @@
 
 namespace alexsers\articles\models;
 
+use alexsers\articles\Module;
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -62,12 +63,12 @@ class ArticlesCategory extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'title' => Yii::t('common', 'Название'),
-            'alias' => Yii::t('common', 'Адрес (URL)'),
-            'parent_id' => Yii::t('common', 'Родитель'),
-            'status_id' => Yii::t('common', 'Статус'),
-            'created_at' => Yii::t('common', 'Создана'),
-            'updated_at' => Yii::t('common', 'Обнавлена'),
+            'title' => Module::t('articles', 'Название'),
+            'alias' => Module::t('articles', 'Адрес (URL)'),
+            'parent_id' => Module::t('articles', 'Родитель'),
+            'status_id' => Module::t('articles', 'Статус'),
+            'created_at' => Module::t('articles', 'Создана'),
+            'updated_at' => Module::t('articles', 'Обнавлена'),
         ];
     }
 

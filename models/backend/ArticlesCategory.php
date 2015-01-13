@@ -2,6 +2,7 @@
 
 namespace alexsers\articles\models\backend;
 
+use alexsers\articles\Module;
 use common\behaviors\PurifierBehavior;
 use common\behaviors\TransliterateBehavior;
 use Yii;
@@ -53,8 +54,8 @@ class ArticlesCategory extends \alexsers\articles\models\ArticlesCategory
     public static function getStatusArray()
     {
         return [
-            self::STATUS_PUBLISHED => Yii::t('backend', 'Активный'),
-            self::STATUS_UNPUBLISHED => Yii::t('backend', 'Не активный'),
+            self::STATUS_PUBLISHED => Module::t('articles', 'Активный'),
+            self::STATUS_UNPUBLISHED => Module::t('articles', 'Не активный'),
         ];
     }
 

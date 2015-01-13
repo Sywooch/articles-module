@@ -1,9 +1,10 @@
 <?php
 
-use backend\themes\admin\widgets\Box;
+use alexsers\articles\Module;
+use alexsers\themes\backend\widgets\Box;
 
-$this->title = Yii::t('backend', 'Статьи');
-$this->params['subtitle'] = Yii::t('backend', 'Создание статьи');
+$this->title = Module::t('articles', 'Статьи');
+$this->params['subtitle'] = Module::t('articles', 'Создание статьи');
 $this->params['breadcrumbs'] = [
     [
         'label' => $this->title,

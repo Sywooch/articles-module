@@ -2,6 +2,7 @@
 
 namespace alexsers\articles\models\backend;
 
+use alexsers\articles\Module;
 use Yii;
 use common\behaviors\PurifierBehavior;
 use common\models\Tag;
@@ -91,8 +92,8 @@ class Articles extends \alexsers\articles\models\Articles
     public static function getStatusArray()
     {
         return [
-            self::STATUS_UNPUBLISHED => Yii::t('backend', 'Скрыта'),
-            self::STATUS_PUBLISHED => Yii::t('backend', 'Опубликована')
+            self::STATUS_UNPUBLISHED => Module::t('articles', 'Скрыта'),
+            self::STATUS_PUBLISHED => Module::t('articles', 'Опубликована')
         ];
     }
 
@@ -139,7 +140,7 @@ class Articles extends \alexsers\articles\models\Articles
         return array_merge(
             $labels,
             [
-                'category_id' => Yii::t('backend', 'Категория'),
+                'category_id' => Module::t('articles', 'Категория'),
             ]
         );
     }

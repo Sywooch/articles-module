@@ -2,6 +2,7 @@
 
 namespace alexsers\articles\controllers\backend;
 
+use alexsers\articles\Module;
 use alexsers\base\components\backend\Controller;
 use alexsers\articles\models\backend\ArticlesCategory;
 use alexsers\articles\models\backend\ArticlesCategorySearch;
@@ -101,7 +102,7 @@ class ArticlesCategoryController extends Controller
                 if ($model->save(false)) {
                     return $this->redirect(['index']);
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'Не удалось сохранить категорию. Попробуйте пожалуйста еще раз!'));
+                    Yii::$app->session->setFlash('danger', Module::t('articles', 'Не удалось сохранить категорию. Попробуйте пожалуйста еще раз!'));
                     return $this->refresh();
                 }
             } elseif (Yii::$app->request->isAjax) {
@@ -138,7 +139,7 @@ class ArticlesCategoryController extends Controller
                 if ($model->save(false)) {
                     return $this->redirect(['index']);
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'Не удалось обновить категорию. Попробуйте пожалуйста еще раз!'));
+                    Yii::$app->session->setFlash('danger', Module::t('articles', 'Не удалось обновить категорию. Попробуйте пожалуйста еще раз!'));
                     return $this->refresh();
                 }
             } elseif (Yii::$app->request->isAjax) {

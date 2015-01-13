@@ -2,6 +2,7 @@
 
 namespace alexsers\articles\controllers\backend;
 
+use alexsers\articles\Module;
 use alexsers\base\components\backend\Controller;
 use alexsers\articles\models\backend\Articles;
 use alexsers\articles\models\backend\ArticlesCategory;
@@ -133,7 +134,7 @@ class ArticlesController extends Controller
                 if ($model->save(false)) {
                     return $this->redirect(['update', 'id' => $model->id]);
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'Не удалось сохранить статью. Попробуйте пожалуйста еще раз!'));
+                    Yii::$app->session->setFlash('danger', Module::t('articles', 'Не удалось сохранить статью. Попробуйте пожалуйста еще раз!'));
                     return $this->refresh();
                 }
             } elseif (Yii::$app->request->isAjax) {
@@ -170,7 +171,7 @@ class ArticlesController extends Controller
                 if ($model->save(false)) {
                     return $this->refresh();
                 } else {
-                    Yii::$app->session->setFlash('danger', Yii::t('backend', 'Не удалось обновить статью. Попробуйте пожалуйста еще раз!'));
+                    Yii::$app->session->setFlash('danger', Module::t('articles', 'Не удалось обновить статью. Попробуйте пожалуйста еще раз!'));
                     return $this->refresh();
                 }
             } elseif (Yii::$app->request->isAjax) {

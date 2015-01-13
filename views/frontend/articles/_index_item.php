@@ -1,5 +1,6 @@
 <?php
 
+use alexsers\articles\Module;
 use alexsers\articles\models\ArticlesCategory;
 use alexsers\users\models\User;
 use yii\helpers\Html;
@@ -26,7 +27,7 @@ use yii\helpers\Html;
         <?= $model->snippet ?>
 
     <?= Html::a(
-        Yii::t('frontend', 'Читать далее') . '  <i class="icon-angle-right"></i><i class="icon-angle-right"></i><i class="icon-angle-right"></i>',
+        Module::t('articles', 'Читать далее') . '  <i class="icon-angle-right"></i><i class="icon-angle-right"></i><i class="icon-angle-right"></i>',
         ['/articles/'.$model->alias],
         ['class' => 'btn btn-link']
     ) ?>

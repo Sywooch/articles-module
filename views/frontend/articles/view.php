@@ -1,12 +1,13 @@
 <?php
 
+use alexsers\articles\Module;
 use frontend\widgets\Menu;
 use alexsers\articles\models\frontend\ArticlesCategory;
 
 $this->title = $model['title'];
 $this->params['breadcrumbs'] = [
     [
-        'label' => ' / ' . Yii::t('frontend', 'Статьи'),
+        'label' => ' / ' . Module::t('articles', 'Статьи'),
         'url' => ['index']
     ],
     ' / ' . $this->title

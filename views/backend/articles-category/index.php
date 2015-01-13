@@ -1,14 +1,15 @@
 <?php
 
-use backend\themes\admin\widgets\Box;
-use backend\themes\admin\widgets\GridView;
+use alexsers\articles\Module;
+use alexsers\themes\backend\widgets\Box;
+use alexsers\themes\backend\widgets\GridView;
 use yii\grid\ActionColumn;
 use yii\grid\SerialColumn;
 use yii\grid\CheckboxColumn;
 use yii\helpers\Html;
 
-$this->title = Yii::t('backend', 'Категории статей');
-$this->params['subtitle'] = Yii::t('backend', 'Список котегорий');
+$this->title = Module::t('articles', 'Категории статей');
+$this->params['subtitle'] = Module::t('articles', 'Список котегорий');
 $this->params['breadcrumbs'] = [
     $this->title
 ];
@@ -57,7 +58,7 @@ $buttonsTemplate = !empty($buttonsTemplate) ? implode(' ', $buttonsTemplate) : n
                             $categoryList,
                             [
                                 'class' => 'form-control',
-                                'prompt' => Yii::t('backend', 'Выберите родителя')
+                                'prompt' => Module::t('articles', 'Выберите родителя')
                             ]
                         )
                     ],
@@ -81,7 +82,7 @@ $buttonsTemplate = !empty($buttonsTemplate) ? implode(' ', $buttonsTemplate) : n
                             $statusArray,
                             [
                                 'class' => 'form-control',
-                                'prompt' => Yii::t('backend', 'Выберите статус')
+                                'prompt' => Module::t('articles', 'Выберите статус')
                             ]
                         )
                     ],

@@ -1,5 +1,6 @@
 <?php
 
+use alexsers\articles\Module;
 use vova07\fileapi\Widget as FileAPI;
 use vova07\imperavi\Widget as Imperavi;
 use dosamigos\selectize\Selectize;
@@ -15,7 +16,7 @@ use yii\widgets\ActiveForm;
     <div class="row">
         <div class="col-sm-12">
             <?= $form->field($model, 'category_id')->dropDownList($categoryList, [
-                'prompt' => Yii::t('backend', 'Выберите категорию')
+                'prompt' => Module::t('articles', 'Выберите категорию')
             ]) ?>
         </div>
     </div>
@@ -87,7 +88,7 @@ use yii\widgets\ActiveForm;
 <?php $box->endBody(); ?>
 <?php $box->beginFooter(); ?>
 <?= Html::submitButton(
-    $model->isNewRecord ? Yii::t('backend', 'Сохранить') : Yii::t('backend','Обнавить'),
+    $model->isNewRecord ? Module::t('articles', 'Сохранить') : Module::t('articles','Обнавить'),
     [
         'class' => $model->isNewRecord ? 'btn btn-primary btn-large' : 'btn btn-success btn-large'
     ]

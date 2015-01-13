@@ -2,6 +2,7 @@
 
 namespace alexsers\articles\models;
 
+use alexsers\articles\Module;
 use alexsers\articles\traits\ModuleTrait;
 use common\helpers\Sitemap;
 use common\behaviors\PurifierBehavior;
@@ -146,17 +147,17 @@ class Articles extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
-            'title' => Yii::t('common', 'Заголовок'),
-            'alias' => Yii::t('common', 'Алиас'),
-            'snippet' => Yii::t('common', 'Введение'),
-            'content' => Yii::t('common', 'Контент'),
-            'views' => Yii::t('common', 'Просмотры'),
-            'status_id' => Yii::t('common', 'Статус'),
-            'created_at' => Yii::t('common', 'Создана'),
-            'updated_at' => Yii::t('common', 'Обновлёна'),
-            'preview_url' => Yii::t('common', 'Мини-изображение'),
-            'image_url' => Yii::t('common', 'Изображение'),
+            'id' => Module::t('articles', 'ID'),
+            'title' => Module::t('articles', 'Заголовок'),
+            'alias' => Module::t('articles', 'Алиас'),
+            'snippet' => Module::t('articles', 'Введение'),
+            'content' => Module::t('articles', 'Контент'),
+            'views' => Module::t('articles', 'Просмотры'),
+            'status_id' => Module::t('articles', 'Статус'),
+            'created_at' => Module::t('articles', 'Создана'),
+            'updated_at' => Module::t('articles', 'Обновлёна'),
+            'preview_url' => Module::t('articles', 'Мини-изображение'),
+            'image_url' => Module::t('articles', 'Изображение'),
         ];
     }
 
