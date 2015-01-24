@@ -4,9 +4,8 @@ namespace alexsers\articles\models\backend;
 
 use alexsers\articles\Module;
 use Yii;
-use common\behaviors\PurifierBehavior;
-use common\models\Tag;
-use common\behaviors\TransliterateBehavior;
+use alexsers\base\behaviors\PurifierBehavior;
+use alexsers\base\behaviors\TransliterateBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
@@ -104,14 +103,6 @@ class Articles extends \alexsers\articles\models\Articles
     public function getCategory()
     {
         return $this->hasOne(ArticlesCategory::className(), ['id' => 'category_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTags()
-    {
-        return $this->hasMany(Tag::className(), ['id' => 'tag_id'])->viaTable('article_tag_assn', ['article_id' => 'id']);
     }
 
     /**

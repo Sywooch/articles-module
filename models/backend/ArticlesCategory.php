@@ -3,8 +3,8 @@
 namespace alexsers\articles\models\backend;
 
 use alexsers\articles\Module;
-use common\behaviors\PurifierBehavior;
-use common\behaviors\TransliterateBehavior;
+use alexsers\base\behaviors\PurifierBehavior;
+use alexsers\base\behaviors\TransliterateBehavior;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\db\ActiveRecord;

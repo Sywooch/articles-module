@@ -4,10 +4,9 @@ namespace alexsers\articles\models;
 
 use alexsers\articles\Module;
 use alexsers\articles\traits\ModuleTrait;
-use common\helpers\Sitemap;
-use common\behaviors\PurifierBehavior;
+use alexsers\base\helpers\Sitemap;
+use alexsers\base\behaviors\PurifierBehavior;
 use vova07\fileapi\behaviors\UploadBehavior;
-use dosamigos\taggable\Taggable;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\behaviors\SluggableBehavior;
@@ -90,10 +89,7 @@ class Articles extends ActiveRecord
                 'textAttributes' => [
                     self::EVENT_BEFORE_VALIDATE => ['title', 'alias']
                 ]
-            ],
-            'taggableBehavior' => [
-                'class' => Taggable::className(),
-            ],
+            ]
         ];
     }
 
@@ -135,9 +131,6 @@ class Articles extends ActiveRecord
 
             // CreatedAtJui and UpdatedAtJui
             [['createdAtJui', 'updatedAtJui'], 'date', 'format' => 'd.m.Y'],
-
-            // Tag
-            [['tagNames'], 'safe'],
         ];
     }
 
@@ -159,14 +152,6 @@ class Articles extends ActiveRecord
             'preview_url' => Module::t('articles', 'Мини-изображение'),
             'image_url' => Module::t('articles', 'Изображение'),
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getArticleTagAssn()
-    {
-        return $this->hasMany(ArticleTagAssn::className(), ['article_id' => 'id']);
     }
 
     /**

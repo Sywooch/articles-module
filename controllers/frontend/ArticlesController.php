@@ -58,7 +58,7 @@ class ArticlesController extends Controller
             'category',
             [
                 'dataProvider' => $dataProvider,
-                'category' => $category
+                'categoryName' => $articleCategory['title']
             ]
         );
     }

@@ -43,9 +43,9 @@ use yii\widgets\ActiveForm;
                 [
                     'settings' => [
                         'minHeight' => 200,
-                        'imageGetJson' => Url::to(['/articles/imperavi-get']),
-                        'imageUpload' => Url::to(['/articles/imperavi-image-upload']),
-                        'fileUpload' => Url::to(['/articles/imperavi-file-upload'])
+                        'imageGetJson' => Url::to(['/articles/articles/imperavi-get']),
+                        'imageUpload' => Url::to(['/articles/articles/imperavi-image-upload']),
+                        'fileUpload' => Url::to(['/articles/articles/imperavi-file-upload'])
                     ]
                 ]
             ) ?>
@@ -58,29 +58,12 @@ use yii\widgets\ActiveForm;
                 [
                     'settings' => [
                         'minHeight' => 300,
-                        'imageGetJson' => Url::to(['/articles/imperavi-get']),
-                        'imageUpload' => Url::to(['/articles/imperavi-image-upload']),
-                        'fileUpload' => Url::to(['/articles/imperavi-file-upload'])
+                        'imageGetJson' => Url::to(['/articles/articles/imperavi-get']),
+                        'imageUpload' => Url::to(['/articles/articles/imperavi-image-upload']),
+                        'fileUpload' => Url::to(['/articles/articles/imperavi-file-upload'])
                     ]
                 ]
             ) ?>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <?= $form->field($model, 'tagNames')->widget(Selectize::className(), [
-                // calls an action that returns a JSON object with matched
-                // tags
-                'url' => ['tag/list'],
-                'options' => ['class' => 'form-control'],
-                'clientOptions' => [
-                    'plugins' => ['remove_button'],
-                    'valueField' => 'name',
-                    'labelField' => 'name',
-                    'searchField' => ['name'],
-                    'create' => true,
-                ],
-            ])->hint('Используйте запятые "," для разделения тегов') ?>
         </div>
     </div>
 

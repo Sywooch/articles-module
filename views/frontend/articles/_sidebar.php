@@ -1,16 +1,11 @@
 <?php
 
-use frontend\widgets\Menu;
+use alexsers\frontend\widgets\Menu;
 use alexsers\articles\models\frontend\ArticlesCategory;
 
 ?>
-<aside class="span4">
-    <!--            <div class="widget search">
-                    <form>
-                        <input type="text" class="input-block-level" placeholder="Search">
-                    </form>
-                </div>-->
-    <!-- /.search -->
+
+<div class="widget categories">
 
     <?=
     Menu::widget(
@@ -23,4 +18,4 @@ use alexsers\articles\models\frontend\ArticlesCategory;
     );
     ?>
 
-</aside>
+</div>
