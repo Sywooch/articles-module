@@ -13,45 +13,43 @@ $this->params['breadcrumbs'] = [
     $this->title
 ]; ?>
 
-<section id="blog" class="container">
-    <div class="row">
-        <aside class="col-sm-4 col-sm-push-8">
-            <?= $this->render('_sidebar') ?>
-        </aside>
-        <div class="col-sm-8 col-sm-pull-4">
-            <div class="blog">
-                <div class="blog-item">
-                    <div class="blog-content">
-                        <h3><?= $model->title ?></h3>
+<div class="row">
+    <aside class="col-sm-4 col-sm-push-8">
+        <?= $this->render('_sidebar') ?>
+    </aside>
+    <div class="col-sm-8 col-sm-pull-4">
+        <div class="blog">
+            <div class="blog-item">
+                <div class="blog-content">
+                    <h3><?= $model->title ?></h3>
 
-                        <div class="entry-meta">
-                            <span><i class="icon-user"></i> <?= $username ?></span>
+                    <div class="entry-meta">
+                        <span><i class="icon-user"></i> <?= $username ?></span>
                             <span><i class="icon-folder-close"></i> <a
                                     href="<?= ArticlesCategory::getArticleCategoryUrl($model->category_id) ?>"><?= ArticlesCategory::getArticleCategory($model->category_id) ?></a></span>
-                            <span><i class="icon-calendar"></i> <?= $model->created ?></span>
-                            <!--                            <span><i class="icon-comment"></i> <a href="blog-item.html#comments">3 Comments</a></span>-->
-                            <span><i class="icon-eye-open"></i> <?= $model->views ?></span>
-                        </div>
-
-                        <?= $model->content ?>
-                        <hr>
-
-                        <?=
-                        \alexsers\comments\widgets\comment\Comment::widget(
-                            [
-                                'model' => $model,
-                                'jsOptions' => [
-                                    'offset' => 80
-                                ]
-                            ]
-                        );
-                        ?>
+                        <span><i class="icon-calendar"></i> <?= $model->created ?></span>
+                        <!--                            <span><i class="icon-comment"></i> <a href="blog-item.html#comments">3 Comments</a></span>-->
+                        <span><i class="icon-eye-open"></i> <?= $model->views ?></span>
                     </div>
+
+                    <?= $model->content ?>
+                    <hr>
+
+                    <?=
+                    \alexsers\comments\widgets\comment\Comment::widget(
+                        [
+                            'model' => $model,
+                            'jsOptions' => [
+                                'offset' => 80
+                            ]
+                        ]
+                    );
+                    ?>
                 </div>
-                <!--/.blog-item-->
             </div>
+            <!--/.blog-item-->
         </div>
-        <!--/.col-md-8-->
     </div>
-    <!--/.row-->
-</section><!--/#blog-->
+    <!--/.col-md-8-->
+</div>
+<!--/.row-->
