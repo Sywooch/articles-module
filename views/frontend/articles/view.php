@@ -34,6 +34,12 @@ $this->params['breadcrumbs'] = [
 
                     <?= $model->content ?>
                     <hr>
+                    <?php if ($tags): ?>
+                    <div class="tags">
+                        <i class="icon-tags"></i> Метки <?= $tags ?>
+                    </div>
+                    <?php endif ?>
+                    <p>&nbsp;</p>
 
                     <?=
                     \alexsers\comments\widgets\comment\Comment::widget(

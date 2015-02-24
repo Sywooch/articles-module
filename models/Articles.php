@@ -6,7 +6,8 @@ use alexsers\articles\Module;
 use alexsers\articles\traits\ModuleTrait;
 use alexsers\base\helpers\Sitemap;
 use alexsers\base\behaviors\PurifierBehavior;
-use vova07\fileapi\behaviors\UploadBehavior;
+use alexsers\tag\models\Tag;
+use creocoder\taggable\TaggableBehavior;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\behaviors\SluggableBehavior;
@@ -40,10 +41,6 @@ class Articles extends ActiveRecord
      * Published status
      */
     const STATUS_PUBLISHED = 1;
-    /**
-     * @var string helper attribute to work with tags
-     */
-    public $tagNames;
 
     /**
      * @inheritdoc
@@ -67,8 +64,12 @@ class Articles extends ActiveRecord
     public function behaviors()
     {
         return [
-            'timestampBehavior' => [
-                'class' => TimestampBehavior::className(),
+            'taggable' => [
+                'class' => TaggableBehavior::className(),
+                // 'tagNamesAsArray' => false,
+                'tagRelation' => 'tag',
+                // 'tagNameAttribute' => 'name',
+                // 'tagFrequencyAttribute' => 'frequency',
             ],
             'sluggableBehavior' => [
                 'class' => SluggableBehavior::className(),
@@ -89,7 +90,14 @@ class Articles extends ActiveRecord
                 'textAttributes' => [
                     self::EVENT_BEFORE_VALIDATE => ['title', 'alias']
                 ]
-            ]
+            ],
+            'timestamp' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+            ],
         ];
     }
 
@@ -131,6 +139,8 @@ class Articles extends ActiveRecord
 
             // CreatedAtJui and UpdatedAtJui
             [['createdAtJui', 'updatedAtJui'], 'date', 'format' => 'd.m.Y'],
+
+            ['tagNames', 'safe'],
         ];
     }
 
@@ -151,7 +161,40 @@ class Articles extends ActiveRecord
             'updated_at' => Module::t('articles', 'Обновлёна'),
             'preview_url' => Module::t('articles', 'Мини-изображение'),
             'image_url' => Module::t('articles', 'Изображение'),
+            'tagNames' => Module::t('articles', 'Тэги'),
         ];
+    }
+
+
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_ALL,
+        ];
+    }
+
+    public function getTag()
+    {
+        return $this->hasMany(Tag::className(), ['id' => 'tag_id'])
+            ->viaTable('{{%article_tag_assn}}', ['article_id' => 'id']);
+    }
+
+    public static function getTags($id)
+    {
+        if($tags_id = ArticleTagAssn::find()->where(['article_id' => $id])->all()){
+            $str='';
+
+            foreach($tags_id as $tag_id)
+            {
+                $tag = Tag::find()->where(['id' => $tag_id->tag_id])->one();
+                $str .=' <a class="btn btn-xs btn-primary" href="/tag/'.$tag->alias.'">'.$tag->name.'</a>';
+            }
+
+            return $str;
+        }else{
+            return false;
+        }
+
     }
 
     /**
@@ -173,12 +216,14 @@ class Articles extends ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
+        parent::afterSave($insert, $changedAttributes);
         Yii::$app->getCache()->delete(Sitemap::ARTICLES_CACHE);
         Sitemap::init();
     }
 
     public function afterDelete()
     {
+        parent::afterDelete();
         Yii::$app->getCache()->delete(Sitemap::ARTICLES_CACHE);
         Sitemap::init();
     }

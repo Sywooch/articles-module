@@ -11,7 +11,7 @@ $this->params['breadcrumbs']=[
         'label' => $this->title,
         'url' => ['/articles'],
     ],
-    'Категория - '.$categoryName
+    'с меткой "' . $tagName . '"'
 ];
 ?>
 

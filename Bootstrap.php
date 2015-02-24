@@ -14,6 +14,7 @@ class Bootstrap implements BootstrapInterface
                 'articles' => 'articles/articles/index',
                 'articles/<alias:[a-zA-Z0-9_-]{1,100}+>' => 'articles/articles/view',
                 'category/<category:[a-zA-Z0-9_-]{1,100}+>' => 'articles/articles/category',
+                'tag/<tag:[a-zA-Z0-9_-]{1,100}+>' => 'articles/articles/tag',
             ]
         );
 

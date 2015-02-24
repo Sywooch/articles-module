@@ -28,50 +28,6 @@ use yii\behaviors\TimestampBehavior;
 class Articles extends \alexsers\articles\models\Articles
 {
     /**
-     * @return array
-     */
-    public function behaviors()
-    {
-        $behaviors = parent::behaviors();
-
-        return array_merge(
-            $behaviors,
-            [
-                'timestamp' => [
-                    'class' => TimestampBehavior::className(),
-                    'attributes' => [
-                        ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
-                        ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
-                    ],
-                ],
-                'transliterateBehavior' => [
-                    'class' => TransliterateBehavior::className(),
-                    'attributes' => [
-                        ActiveRecord::EVENT_BEFORE_INSERT => ['title' => 'alias'],
-                        ActiveRecord::EVENT_BEFORE_UPDATE => ['title' => 'alias'],
-                    ]
-                ],
-                'purifierBehavior' => [
-                    'class' => PurifierBehavior::className(),
-                    'textAttributes' => [
-                        ActiveRecord::EVENT_BEFORE_INSERT => ['title'],
-                        ActiveRecord::EVENT_BEFORE_INSERT => ['title'],
-                    ],
-                    'purifierOptions' => [
-                        'HTML.AllowedElements' => Yii::$app->params['allowHtmlTags'],
-                        'AutoFormat.RemoveEmpty' => true
-                    ]
-                ],
-                'sluggableBehavior' => [
-                    'class' => SluggableBehavior::className(),
-                    'attribute' => 'title',
-                    'slugAttribute' => 'alias'
-                ],
-            ]
-        );
-    }
-
-    /**
      * Читаемый статус статьи
      * @return mixed || null
      */
@@ -149,6 +105,7 @@ class Articles extends \alexsers\articles\models\Articles
                 'snippet',
                 'content',
                 'status_id',
+                'tagNames',
             ],
             'admin-update' => [
                 'title',
@@ -157,6 +114,7 @@ class Articles extends \alexsers\articles\models\Articles
                 'snippet',
                 'content',
                 'status_id',
+                'tagNames',
             ]
         ];
     }

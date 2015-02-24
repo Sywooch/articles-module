@@ -4,6 +4,7 @@ namespace alexsers\articles\controllers\frontend;
 
 use alexsers\articles\models\frontend\Articles;
 use alexsers\articles\models\frontend\ArticlesCategory;
+use alexsers\tag\models\Tag;
 use alexsers\users\models\User;
 use alexsers\base\components\frontend\Controller;
 use alexsers\comments\models\frontend\Comments;
@@ -64,6 +65,33 @@ class ArticlesController extends Controller
     }
 
     /**
+     * Вывод статей по категории
+     * @param $category
+     * @return string
+     */
+    function actionTag($tag)
+    {
+        $articlesArrayId = Articles::getTagAlias($tag);
+        $tagName = Tag::getTagName($tag);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => Articles::find()->tag($articlesArrayId),
+            'pagination' => [
+                'pageSize' => $this->module->recordPerPage
+            ]
+        ]);
+
+        return $this->render(
+            'tag',
+            [
+                'dataProvider' => $dataProvider,
+                'tagName' => $tagName,
+                //'test' => $test
+            ]
+        );
+    }
+
+    /**
      * Просмотр статьи
      * @param $alias
      * @return string
@@ -75,6 +103,7 @@ class ArticlesController extends Controller
             $this->counter($model);
             $username = User::getUsername($model->author_id);
             $comments = Comments::find()->where(['model_id' => $model->id])->all();
+            $tags = Articles::getTags($model->id);
             $modelComment = new Comments();
 
             return $this->render(
@@ -83,7 +112,8 @@ class ArticlesController extends Controller
                     'model' => $model,
                     'username' => $username,
                     'comments' => $comments,
-                    'modelComment' => $modelComment
+                    'modelComment' => $modelComment,
+                    'tags' => $tags
                 ]
             );
         } else {

@@ -2,6 +2,8 @@
 
 namespace alexsers\articles\models\frontend;
 
+use alexsers\articles\models\ArticleTagAssn;
+use alexsers\tag\models\Tag;
 use Yii;
 
 /**
@@ -77,5 +79,22 @@ class Articles extends \alexsers\articles\models\Articles
     public function updateViews()
     {
         return $this->updateCounters(['views' => 1]);
+    }
+
+
+
+    public static function getTagAlias($tag)
+    {
+        $tagId = Tag::find()->where(['alias' => $tag])->one();
+        $articleId = ArticleTagAssn::find()->where(['tag_id' => $tagId['id']])->all();
+
+        $array=[];
+
+        foreach($articleId as $id)
+        {
+            array_push($array, $id['article_id']);
+        }
+
+        return $array;
     }
 }

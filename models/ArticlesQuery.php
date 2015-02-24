@@ -2,6 +2,7 @@
 
 namespace alexsers\articles\models;
 
+use creocoder\taggable\TaggableQueryBehavior;
 use yii\db\ActiveQuery;
 
 /**
@@ -9,6 +10,12 @@ use yii\db\ActiveQuery;
  */
 class ArticlesQuery extends ActiveQuery
 {
+    public function behaviors()
+    {
+        return [
+            TaggableQueryBehavior::className(),
+        ];
+    }
     /**
      * Select published posts.
      *
@@ -37,6 +44,13 @@ class ArticlesQuery extends ActiveQuery
     public function category($category)
     {
         $this->andWhere(['category_id' => $category]);
+
+        return $this;
+    }
+
+    public function tag($articleId)
+    {
+        $this->andWhere(['id'=>$articleId]);
 
         return $this;
     }

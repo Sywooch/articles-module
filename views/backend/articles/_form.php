@@ -1,9 +1,9 @@
 <?php
 
 use alexsers\articles\Module;
+use dosamigos\selectize\Selectize;
 use vova07\fileapi\Widget as FileAPI;
 use vova07\imperavi\Widget as Imperavi;
-use dosamigos\selectize\Selectize;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\jui\DatePicker;
@@ -66,6 +66,18 @@ use yii\widgets\ActiveForm;
             ) ?>
         </div>
     </div>
+
+<?= $form->field($model, 'tagNames')->widget(Selectize::className(), [
+    'url' => ['/tag/tag/list'],
+    'options' => ['class' => 'form-control'],
+    'clientOptions' => [
+        'plugins' => ['remove_button'],
+        'valueField' => 'name',
+        'labelField' => 'name',
+        'searchField' => ['name'],
+        'create' => true,
+    ],
+])->hint('Используйте запятые для разделения меток') ?>
 
 
 <?php $box->endBody(); ?>

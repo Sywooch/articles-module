@@ -40,10 +40,17 @@ class m141021_070637_articles extends Migration
             'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL'
         ], $tableOptions);
 
+        $this->createTable('{{%article_tag_assn}}', [
+            'article_id' => Schema::TYPE_INTEGER . ' NOT NULL',
+            'tag_id' => Schema::TYPE_INTEGER . ' NOT NULL',
+        ]);
+
         // Indexes
         $this->createIndex('parent_id', '{{%articles_category%}}', 'parent_id');
         $this->createIndex('category_id', '{{%articles%}}', 'category_id');
         $this->createIndex('author_id', '{{%articles%}}', 'author_id');
+
+        $this->addPrimaryKey('', '{{%article_tag_assn}}', ['article_id', 'tag_id']);
 
         if ($this->db->driverName === 'mysql') {
             $this->createIndex('idx_article_author_id', '{{%articles}}', 'author_id');
@@ -68,5 +75,6 @@ class m141021_070637_articles extends Migration
         }
         $this->dropTable('{{%article}}');
         $this->dropTable('{{%articles_category}}');
+        $this->dropTable('{{%article_tag_assn}}');
     }
 }
