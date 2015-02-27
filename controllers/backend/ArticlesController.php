@@ -7,6 +7,7 @@ use alexsers\base\components\backend\Controller;
 use alexsers\articles\models\backend\Articles;
 use alexsers\articles\models\backend\ArticlesCategory;
 use alexsers\articles\models\backend\ArticlesSearch;
+use alexsers\users\models\backend\User;
 use vova07\imperavi\actions\GetAction as ImperaviGet;
 use vova07\imperavi\actions\UploadAction as ImperaviUpload;
 use vova07\fileapi\actions\UploadAction as FileAPIUpload;
@@ -107,6 +108,7 @@ class ArticlesController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $statusArray = Articles::getStatusArray();
         $categoryList = ArticlesCategory::getCategoryListArray();
+        $userList = User::getUserListArray();
 
         return $this->render(
             'index',
@@ -114,7 +116,8 @@ class ArticlesController extends Controller
                 'dataProvider' => $dataProvider,
                 'searchModel' => $searchModel,
                 'statusArray' => $statusArray,
-                'categoryList' => $categoryList
+                'categoryList' => $categoryList,
+                'userList' => $userList
             ]
         );
     }
@@ -128,6 +131,7 @@ class ArticlesController extends Controller
         $model = new Articles(['scenario' => 'admin-create']);
         $statusArray = Articles::getStatusArray();
         $categoryList = ArticlesCategory::getCategoryListArray();
+        $userList = User::getUserListArray();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -148,7 +152,8 @@ class ArticlesController extends Controller
             [
                 'model' => $model,
                 'statusArray' => $statusArray,
-                'categoryList' => $categoryList
+                'categoryList' => $categoryList,
+                'userList' => $userList
             ]
         );
     }
@@ -165,6 +170,7 @@ class ArticlesController extends Controller
         $model->setScenario('admin-update');
         $statusArray = Articles::getStatusArray();
         $categoryList = ArticlesCategory::getCategoryListArray();
+        $userList = User::getUserListArray();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -185,7 +191,8 @@ class ArticlesController extends Controller
             [
                 'model' => $model,
                 'statusArray' => $statusArray,
-                'categoryList' => $categoryList
+                'categoryList' => $categoryList,
+                'userList' => $userList
             ]
         );
     }

@@ -96,28 +96,33 @@ $buttonsTemplate = !empty($buttonsTemplate) ? implode(' ', $buttonsTemplate) : n
                         )
                     ],
                     [
+                        'attribute' => 'author_id',
+                        'format' => 'html',
+                        'value' => function ($model) {
+                                if($model->author_id !== NULL)
+                                {
+                                    return Html::a($model->user['username'], ['/users/user/update', 'id' => $model->user['id']]);
+                                }else{
+                                    return NULL;
+                                }
+                            },
+                        'filter' => Html::activeDropDownList(
+                                $searchModel,
+                                'author_id',
+                                $userList,
+                                [
+                                    'class' => 'form-control',
+                                    'prompt' => Module::t('articles', 'Выберите автора')
+                                ]
+                            )
+                    ],
+                    [
                         'attribute' => 'created_at',
                         'format' => 'date',
 /*                        'filter' => DatePicker::widget(
                             [
                                 'model' => $searchModel,
                                 'attribute' => 'created_at',
-                                'options' => [
-                                    'class' => 'form-control'
-                                ],
-                                'clientOptions' => [
-                                    'dateFormat' => 'dd.mm.yy',
-                                ]
-                            ]
-                        )*/
-                    ],
-                    [
-                        'attribute' => 'updated_at',
-                        'format' => 'date',
-/*                        'filter' => DatePicker::widget(
-                            [
-                                'model' => $searchModel,
-                                'attribute' => 'updated_at',
                                 'options' => [
                                     'class' => 'form-control'
                                 ],

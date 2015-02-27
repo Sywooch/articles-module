@@ -53,15 +53,12 @@ class ArticlesSearch extends Articles
                 'id' => $this->id,
                 'category_id' => $this->category_id,
                 'status_id' => $this->status_id,
-                'FROM_UNIXTIME(created_at, "%d.%m.%Y")' => $this->created_at,
-                'FROM_UNIXTIME(updated_at, "%d.%m.%Y")' => $this->updated_at
+                'author_id' => $this->author_id,
             ]
         );
 
         $query->andFilterWhere(['like', 'alias', $this->alias]);
         $query->andFilterWhere(['like', 'title', $this->title]);
-        $query->andFilterWhere(['like', 'snippet', $this->snippet]);
-        $query->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;
     }

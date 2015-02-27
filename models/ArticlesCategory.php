@@ -3,6 +3,7 @@
 namespace alexsers\articles\models;
 
 use alexsers\articles\Module;
+use alexsers\base\helpers\Sitemap;
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -117,11 +118,13 @@ class ArticlesCategory extends ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
+        parent::afterSave($insert, $changedAttributes);
         Yii::$app->getCache()->delete(self::CACHE_MENU_ARTICLE_CATEGORY);
     }
 
     public function afterDelete()
     {
+        parent::afterDelete();
         Yii::$app->getCache()->delete(self::CACHE_MENU_ARTICLE_CATEGORY);
     }
 }

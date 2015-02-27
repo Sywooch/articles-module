@@ -38,7 +38,8 @@ $buttonsTemplate = !empty($buttonsTemplate) ? implode(' ', $buttonsTemplate) : n
                 'model' => $model,
                 'statusArray' => $statusArray,
                 'categoryList' => $categoryList,
-                'box' => $box
+                'box' => $box,
+                'userList' => $userList
             ]
         );
         Box::end(); ?>

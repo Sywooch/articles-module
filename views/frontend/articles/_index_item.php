@@ -29,7 +29,7 @@ use yii\helpers\Html;
     <?= Html::a(
         Module::t('articles', 'Читать далее') . '  <i class="icon-angle-right"></i><i class="icon-angle-right"></i><i class="icon-angle-right"></i>',
         ['/articles/'.$model->alias],
-        ['class' => 'btn btn-link']
+        ['class' => 'btn btn-success']
     ) ?>
 </div>
 <!-- End Blog Item -->

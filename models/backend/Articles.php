@@ -3,6 +3,7 @@
 namespace alexsers\articles\models\backend;
 
 use alexsers\articles\Module;
+use alexsers\users\models\User;
 use Yii;
 use alexsers\base\behaviors\PurifierBehavior;
 use alexsers\base\behaviors\TransliterateBehavior;
@@ -60,6 +61,10 @@ class Articles extends \alexsers\articles\models\Articles
     {
         return $this->hasOne(ArticlesCategory::className(), ['id' => 'category_id']);
     }
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'author_id']);
+    }
 
     /**
      * @inheritdoc
@@ -80,21 +85,6 @@ class Articles extends \alexsers\articles\models\Articles
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
-        $labels = parent::attributeLabels();
-
-        return array_merge(
-            $labels,
-            [
-                'category_id' => Module::t('articles', 'Категория'),
-            ]
-        );
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function scenarios()
     {
         return[
@@ -102,6 +92,7 @@ class Articles extends \alexsers\articles\models\Articles
                 'title',
                 'alias',
                 'category_id',
+                'author_id',
                 'snippet',
                 'content',
                 'status_id',
@@ -111,6 +102,7 @@ class Articles extends \alexsers\articles\models\Articles
                 'title',
                 'alias',
                 'category_id',
+                'author_id',
                 'snippet',
                 'content',
                 'status_id',

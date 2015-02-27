@@ -8,10 +8,13 @@ use alexsers\tag\models\Tag;
 use alexsers\users\models\User;
 use alexsers\base\components\frontend\Controller;
 use alexsers\comments\models\frontend\Comments;
+use alexsers\articles\Module;
 use Yii;
 use yii\web\Cookie;
 use yii\web\HttpException;
 use yii\data\ActiveDataProvider;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 /**
  * Контроллер для вывода статей
@@ -27,10 +30,16 @@ class ArticlesController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Articles::find()->published(),
+            'sort'=>array(
+                'defaultOrder'=> [
+                    'id' => SORT_DESC
+                ],
+            ),
             'pagination' => [
                 'pageSize' => $this->module->recordPerPage
             ]
         ]);
+        $this->storeReturnUrl();
 
         return $this->render(
             'index',
@@ -50,10 +59,16 @@ class ArticlesController extends Controller
         $articleCategory = ArticlesCategory::find()->where(['alias' => $category])->one();
         $dataProvider = new ActiveDataProvider([
             'query' => Articles::find()->category($articleCategory['id']),
+            'sort'=>array(
+                'defaultOrder'=> [
+                    'id' => SORT_DESC
+                ],
+            ),
             'pagination' => [
                 'pageSize' => $this->module->recordPerPage
             ]
         ]);
+        $this->storeReturnUrl();
 
         return $this->render(
             'category',
@@ -76,17 +91,22 @@ class ArticlesController extends Controller
 
         $dataProvider = new ActiveDataProvider([
             'query' => Articles::find()->tag($articlesArrayId),
+            'sort'=>array(
+                'defaultOrder'=> [
+                    'id' => SORT_DESC
+                ],
+            ),
             'pagination' => [
                 'pageSize' => $this->module->recordPerPage
             ]
         ]);
+        $this->storeReturnUrl();
 
         return $this->render(
             'tag',
             [
                 'dataProvider' => $dataProvider,
                 'tagName' => $tagName,
-                //'test' => $test
             ]
         );
     }
@@ -105,6 +125,7 @@ class ArticlesController extends Controller
             $comments = Comments::find()->where(['model_id' => $model->id])->all();
             $tags = Articles::getTags($model->id);
             $modelComment = new Comments();
+            $this->storeReturnUrl();
 
             return $this->render(
                 'view',
@@ -120,6 +141,38 @@ class ArticlesController extends Controller
             throw new HttpException(404);
         }
     }
+
+    /**
+     * Создание статьи
+     * @return array|string|Response
+     */
+/*    public function actionCreate()
+    {
+        $model = new Articles();
+        $categoryList = ArticlesCategory::getCategoryListArray();
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                if ($model->save(false)) {
+                    return $this->redirect(['view', 'alias' => $model->alias]);
+                } else {
+                    Yii::$app->session->setFlash('danger', Module::t('articles', 'Не удалось сохранить статью. Попробуйте пожалуйста еще раз!'));
+                    return $this->refresh();
+                }
+            } elseif (Yii::$app->request->isAjax) {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return ActiveForm::validate($model);
+            }
+        }
+
+        return $this->render(
+            'create',
+            [
+                'model' => $model,
+                'categoryList' => $categoryList,
+            ]
+        );
+    }*/
 
     /**
      * Обновление просмотров статьи
@@ -156,4 +209,6 @@ class ArticlesController extends Controller
             }
         }
     }
+
+
 }

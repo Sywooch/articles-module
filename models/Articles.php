@@ -153,14 +153,14 @@ class Articles extends ActiveRecord
             'id' => Module::t('articles', 'ID'),
             'title' => Module::t('articles', 'Заголовок'),
             'alias' => Module::t('articles', 'Алиас'),
+            'category_id' => Module::t('articles', 'Категория'),
+            'author_id' => Module::t('articles', 'Автор'),
             'snippet' => Module::t('articles', 'Введение'),
             'content' => Module::t('articles', 'Контент'),
             'views' => Module::t('articles', 'Просмотры'),
             'status_id' => Module::t('articles', 'Статус'),
             'created_at' => Module::t('articles', 'Создана'),
             'updated_at' => Module::t('articles', 'Обновлёна'),
-            'preview_url' => Module::t('articles', 'Мини-изображение'),
-            'image_url' => Module::t('articles', 'Изображение'),
             'tagNames' => Module::t('articles', 'Тэги'),
         ];
     }
@@ -205,7 +205,7 @@ class Articles extends ActiveRecord
     {
         if(parent::beforeSave($insert)){
             if($this->isNewRecord){
-                if(!$this->author_id){
+                if(empty($this->author_id)){
                     $this->author_id = Yii::$app->getUser()->id;
                 }
             }

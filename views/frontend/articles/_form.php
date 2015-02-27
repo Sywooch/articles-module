@@ -11,7 +11,6 @@ use yii\widgets\ActiveForm;
 
 ?>
 <?php $form = ActiveForm::begin(); ?>
-<?php $box->beginBody(); ?>
 
     <div class="row">
         <div class="col-sm-12">
@@ -30,20 +29,6 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'alias') ?>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <?= $form->field($model, 'status_id')->dropDownList($statusArray) ?>
-        </div>
-    </div>
-    <?php if(Yii::$app->user->can('bcUpdateAuthorArticles')) : ?>
-    <div class="row">
-        <div class="col-sm-12">
-            <?= $form->field($model, 'author_id')->dropDownList($userList, [
-                'prompt' => Module::t('articles', 'Выберите Автора')
-            ]) ?>
-        </div>
-    </div>
-    <?php endif ?>
     <div class="row">
         <div class="col-sm-12">
             <?= $form->field($model, 'snippet')->widget(
@@ -88,13 +73,10 @@ use yii\widgets\ActiveForm;
 ])->hint('Используйте запятые для разделения меток') ?>
 
 
-<?php $box->endBody(); ?>
-<?php $box->beginFooter(); ?>
 <?= Html::submitButton(
     $model->isNewRecord ? Module::t('articles', 'Сохранить') : Module::t('articles','Обнавить'),
     [
         'class' => $model->isNewRecord ? 'btn btn-primary btn-large' : 'btn btn-success btn-large'
     ]
 ) ?>
-<?php $box->endFooter(); ?>
 <?php ActiveForm::end(); ?>
