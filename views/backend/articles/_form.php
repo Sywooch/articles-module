@@ -68,7 +68,12 @@ use yii\widgets\ActiveForm;
                         'minHeight' => 300,
                         'imageGetJson' => Url::to(['/articles/articles/imperavi-get']),
                         'imageUpload' => Url::to(['/articles/articles/imperavi-image-upload']),
-                        'fileUpload' => Url::to(['/articles/articles/imperavi-file-upload'])
+                        'fileUpload' => Url::to(['/articles/articles/imperavi-file-upload']),
+                        //'buttons' => ['html','formatting', 'bold', 'italic'],
+                        'plugins' => [
+                            'video',
+                            'table'
+                        ]
                     ]
                 ]
             ) ?>

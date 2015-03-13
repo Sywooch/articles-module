@@ -10,7 +10,7 @@ use alexsers\tag\models\Tag;
 use creocoder\taggable\TaggableBehavior;
 use Yii;
 use yii\db\ActiveRecord;
-use yii\behaviors\SluggableBehavior;
+use alexsers\base\behaviors\TransliterateBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -71,11 +71,6 @@ class Articles extends ActiveRecord
                 // 'tagNameAttribute' => 'name',
                 // 'tagFrequencyAttribute' => 'frequency',
             ],
-            'sluggableBehavior' => [
-                'class' => SluggableBehavior::className(),
-                'attribute' => 'title',
-                'slugAttribute' => 'alias'
-            ],
             'purifierBehavior' => [
                 'class' => PurifierBehavior::className(),
                 'attributes' => [
@@ -97,6 +92,13 @@ class Articles extends ActiveRecord
                     ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
                     ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
                 ],
+            ],
+            'transliterateBehavior' => [
+                'class' => TransliterateBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['title' => 'alias'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['title' => 'alias'],
+                ]
             ],
         ];
     }
@@ -188,6 +190,32 @@ class Articles extends ActiveRecord
             {
                 $tag = Tag::find()->where(['id' => $tag_id->tag_id])->one();
                 $str .=' <a class="btn btn-xs btn-primary" href="/tag/'.$tag->alias.'">'.$tag->name.'</a>';
+            }
+
+            return $str;
+        }else{
+            return false;
+        }
+
+    }
+
+    public static function getKeywords($id)
+    {
+        if($tags_id = ArticleTagAssn::find()->where(['article_id' => $id])->all()){
+            $str='';
+            $i=0;
+
+            foreach($tags_id as $tag_id)
+            {
+                $tag = Tag::find()->where(['id' => $tag_id->tag_id])->one();
+                if($i==0)
+                {
+                    $str .= $tag->name;
+                    $i++;
+                }else
+                {
+                    $str .= ', '.$tag->name;
+                }
             }
 
             return $str;

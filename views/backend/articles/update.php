@@ -26,7 +26,7 @@ if(Yii::$app->user->can('bcArticleDelete')){
 $buttonsTemplate = !empty($buttonsTemplate) ? implode(' ', $buttonsTemplate) : null;
 ?>
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-7">
         <?php $box = Box::begin(
             [
                 'title' => $this->params['subtitle'],
@@ -51,5 +51,8 @@ $buttonsTemplate = !empty($buttonsTemplate) ? implode(' ', $buttonsTemplate) : n
             ]
         );
         Box::end(); ?>
+    </div>
+
+    <div class="col-sm-5">
     </div>
 </div>

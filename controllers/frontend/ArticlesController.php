@@ -15,6 +15,7 @@ use yii\web\HttpException;
 use yii\data\ActiveDataProvider;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use yii\helpers\Html;
 
 /**
  * Контроллер для вывода статей
@@ -58,7 +59,7 @@ class ArticlesController extends Controller
     {
         $articleCategory = ArticlesCategory::find()->where(['alias' => $category])->one();
         $dataProvider = new ActiveDataProvider([
-            'query' => Articles::find()->category($articleCategory['id']),
+            'query' => Articles::find()->published()->category($articleCategory['id']),
             'sort'=>array(
                 'defaultOrder'=> [
                     'id' => SORT_DESC
@@ -90,7 +91,7 @@ class ArticlesController extends Controller
         $tagName = Tag::getTagName($tag);
 
         $dataProvider = new ActiveDataProvider([
-            'query' => Articles::find()->tag($articlesArrayId),
+            'query' => Articles::find()->published()->tag($articlesArrayId),
             'sort'=>array(
                 'defaultOrder'=> [
                     'id' => SORT_DESC
@@ -124,8 +125,15 @@ class ArticlesController extends Controller
             $username = User::getUsername($model->author_id);
             $comments = Comments::find()->where(['model_id' => $model->id])->all();
             $tags = Articles::getTags($model->id);
+            $keywords = Articles::getKeywords($model->id);
             $modelComment = new Comments();
             $this->storeReturnUrl();
+
+            // ToDo Переделать!!!!!!!!!!!!!!!!!
+            $description = strip_tags($model->content);
+            $count = stripos($description,'.');
+            $description = substr($description, 0, $count).'...';
+
 
             return $this->render(
                 'view',
@@ -134,7 +142,9 @@ class ArticlesController extends Controller
                     'username' => $username,
                     'comments' => $comments,
                     'modelComment' => $modelComment,
-                    'tags' => $tags
+                    'tags' => $tags,
+                    'keywords' => $keywords,
+                    'description' => $description,
                 ]
             );
         } else {

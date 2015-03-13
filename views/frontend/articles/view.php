@@ -4,13 +4,17 @@ use alexsers\articles\Module;
 use alexsers\frontend\widgets\Menu;
 use alexsers\articles\models\frontend\ArticlesCategory;
 
-$this->title = $model['title'];
+$this->title = $model['title'] . ' / ' . Module::t('articles', 'Статьи о рыбалке');
+$this->registerMetaTag(['name' => 'description', 'content' => $description]);
+$this->registerMetaTag(['name' => 'keywords', 'content' => $keywords]);
+$this->params['breadcrumbsTitle'] = Module::t('articles', 'Статьи');
+
 $this->params['breadcrumbs'] = [
     [
         'label' => Module::t('articles', 'Статьи'),
         'url' => ['index']
     ],
-    $this->title
+    $model['title']
 ]; ?>
 
 <div class="row">
@@ -33,13 +37,27 @@ $this->params['breadcrumbs'] = [
                     </div>
 
                     <?= $model->content ?>
-                    <hr>
                     <?php if ($tags): ?>
-                    <div class="tags">
-                        <i class="icon-tags"></i> Метки <?= $tags ?>
-                    </div>
+                        <div class="tags">
+                            <i class="icon-tags"></i> Метки <?= $tags ?>
+                        </div>
+
+                        <hr>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-8">
+                                <p>Поделитесь статьёй с друзьями.</p>
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                    <script type="text/javascript" src="//yastatic.net/share/share.js"
+                                            charset="utf-8"></script>
+                                <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="small"
+                                     data-yashareQuickServices="vkontakte,facebook,twitter,moimir"
+                                     data-yashareTheme="counter">
+                                </div>
+                            </div>
+                        </div>
+
                     <?php endif ?>
-                    <p>&nbsp;</p>
 
                     <?=
                     \alexsers\comments\widgets\comment\Comment::widget(

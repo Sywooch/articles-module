@@ -35,7 +35,12 @@ class ArticlesCategory extends \alexsers\articles\models\ArticlesCategory
             Yii::$app->cache->set(self::CACHE_MENU_ARTICLE_CATEGORY,$models);
         }
 
-        $array[]=[];
+        $array[]=[
+            'label' => 'Категории',
+            'options' => [
+                'class' => 'dropdown-header'
+            ]
+        ];
 
         foreach($models as $model)
         {

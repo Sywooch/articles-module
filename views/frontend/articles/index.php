@@ -3,8 +3,10 @@
 use alexsers\articles\Module;
 use yii\widgets\ListView;
 
-$this->title = Module::t('articles', 'Статьи');
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = Module::t('articles', 'Статьи о рыбалке');
+$this->registerMetaTag(['name' => 'keywords', 'content' => 'Слово рыбака - сайт о рыбалке для всех.']);
+$this->registerMetaTag(['name' => 'description', 'content' => 'рыбалка, статьи, статьи о рыбалке, слово рыбака, сайт рыбалка']);
+$this->params['breadcrumbs'][] = Module::t('articles', 'Статьи');
 ?>
 
 <section id="blog" class="container">
