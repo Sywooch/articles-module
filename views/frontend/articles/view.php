@@ -19,7 +19,9 @@ $this->params['breadcrumbs'] = [
 
 <div class="row">
     <aside class="col-sm-4 col-sm-push-8">
-        <?= $this->render('_sidebar') ?>
+        <div class="sidebar">
+            <?= $this->render('_sidebar') ?>
+        </div>
     </aside>
     <div class="col-sm-8 col-sm-pull-4">
         <div class="blog">
