@@ -35,7 +35,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'status_id')->dropDownList($statusArray) ?>
         </div>
     </div>
-    <?php if(Yii::$app->user->can('bcUpdateAuthorArticles')) : ?>
+    <?php if(Yii::$app->user->can('BUpdateAuthorArticles')) : ?>
     <div class="row">
         <div class="col-sm-12">
             <?= $form->field($model, 'author_id')->dropDownList($userList, [

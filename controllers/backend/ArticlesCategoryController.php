@@ -28,27 +28,27 @@ class ArticlesCategoryController extends Controller
             [
                 'allow' => true,
                 'actions' => ['index'],
-                'roles' => ['bcArticleCategoryIndex']
+                'roles' => ['BArticleCategoryIndex']
             ],
             [
                 'allow' => true,
                 'actions' => ['create'],
-                'roles' => ['bcArticleCategoryCreate']
+                'roles' => ['BArticleCategoryCreate']
             ],
             [
                 'allow' => true,
                 'actions' => ['update'],
-                'roles' => ['bcArticleCategoryUpdate']
+                'roles' => ['BArticleCategoryUpdate']
             ],
             [
                 'allow' => true,
                 'actions' => ['delete'],
-                'roles' => ['bcArticleCategoryDelete']
+                'roles' => ['BArticleCategoryDelete']
             ],
             [
                 'allow' => true,
                 'actions' => ['batch-delete'],
-                'roles' => ['bcArticleCategoryBatchDelete']
+                'roles' => ['BArticleCategoryBatchDelete']
             ],
             [
                 'allow' => false,

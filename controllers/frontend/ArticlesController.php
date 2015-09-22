@@ -82,8 +82,7 @@ class ArticlesController extends Controller
 
     /**
      * Вывод статей по категории
-     * @param $category
-     * @return string
+     *
      */
     function actionTag($tag)
     {

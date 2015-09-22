@@ -34,27 +34,27 @@ class ArticlesController extends Controller
             [
                 'allow' => true,
                 'actions' => ['index'],
-                'roles' => ['bcArticleIndex']
+                'roles' => ['BArticleIndex']
             ],
             [
                 'allow' => true,
                 'actions' => ['create','imperavi-get','imperavi-image-upload','imperavi-file-upload','fileapi-upload'],
-                'roles' => ['bcArticleCreate']
+                'roles' => ['BArticleCreate']
             ],
             [
                 'allow' => true,
                 'actions' => ['update','imperavi-get','imperavi-image-upload','imperavi-file-upload','fileapi-upload'],
-                'roles' => ['bcArticleUpdate']
+                'roles' => ['BArticleUpdate']
             ],
             [
                 'allow' => true,
                 'actions' => ['delete'],
-                'roles' => ['bcArticleDelete']
+                'roles' => ['BArticleDelete']
             ],
             [
                 'allow' => true,
                 'actions' => ['batch-delete'],
-                'roles' => ['bcArticleBatchDelete']
+                'roles' => ['BArticleBatchDelete']
             ],
             [
                 'allow' => false,

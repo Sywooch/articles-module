@@ -15,11 +15,11 @@ $this->params['breadcrumbs'] = [
 
 $buttonsTemplate[]='{cancel}';
 
-if(Yii::$app->user->can('bcArticleCreate')){
+if(Yii::$app->user->can('BArticleCreate')){
     $buttonsTemplate[]='{create}';
 }
 
-if(Yii::$app->user->can('bcArticleDelete')){
+if(Yii::$app->user->can('BArticleDelete')){
     $buttonsTemplate[]='{delete}';
 }
 
