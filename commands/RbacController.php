@@ -38,7 +38,7 @@ class RbacController extends Controller
         $BArticleCategoryBatchDelete->description = 'Удаление категрорий статей';
         $auth->add($BArticleCategoryBatchDelete);
 
-        /* Статьи */
+        /* Статьи Backend */
         $BArticleIndex = $auth->createPermission('BArticleIndex');
         $BArticleIndex->description = 'Список статей';
         $auth->add($BArticleIndex);
@@ -64,12 +64,35 @@ class RbacController extends Controller
         $auth->add($BUpdateAuthorArticles);
 
 
+        /* Статьи Backend */
+        $FArticleIndex = $auth->createPermission('FArticleIndex');
+        $FArticleIndex->description = 'Просмотр статей';
+        $auth->add($FArticleIndex);
 
+        $FArticleCategory = $auth->createPermission('FArticleCategory');
+        $FArticleCategory->description = 'Просмотр статей по категориям';
+        $auth->add($FArticleCategory);
+
+        $FArticleTag = $auth->createPermission('FArticleTag');
+        $FArticleTag->description = 'Просмотр статей по тегам';
+        $auth->add($FArticleTag);
+
+        $FArticleCreate = $auth->createPermission('FArticleCreate');
+        $FArticleCreate->description = 'Создание статьи';
+        $auth->add($FArticleCreate);
+
+
+        $user = $auth->getRole('user');
         $admin = $auth->getRole('admin');
         $superadmin = $auth->getRole('superadmin');
 
+        //  User
+        $auth->addChild($user, $FArticleIndex);
+        $auth->addChild($user, $FArticleCategory);
+        $auth->addChild($user, $FArticleTag);
+        $auth->addChild($user, $FArticleCreate);
 
-
+        // Admin
         $auth->addChild($admin, $BArticleCategoryIndex);
         $auth->addChild($admin, $BArticleCategoryCreate);
         $auth->addChild($admin, $BArticleCategoryUpdate);
@@ -77,7 +100,7 @@ class RbacController extends Controller
         $auth->addChild($admin, $BArticleCreate);
         $auth->addChild($admin, $BArticleUpdate);
 
-
+        // Superadmin
         $auth->addChild($superadmin, $BArticleCategoryDelete);
         $auth->addChild($superadmin, $BArticleCategoryBatchDelete);
         $auth->addChild($superadmin, $BArticleDelete);

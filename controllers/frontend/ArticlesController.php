@@ -15,7 +15,9 @@ use yii\web\HttpException;
 use yii\data\ActiveDataProvider;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use yii\filters\VerbFilter;
 use yii\helpers\Html;
+use yii\filters\AccessControl;
 
 /**
  * Контроллер для вывода статей
@@ -24,6 +26,57 @@ use yii\helpers\Html;
  */
 class ArticlesController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['?', '@']
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['category'],
+                        'roles' => ['?', '@']
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['tag'],
+                        'roles' => ['?', '@']
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['?', '@']
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['FArticleCreate']
+                    ],
+                    [
+                        'allow' => false,
+                    ]
+                ]
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'create' => ['get', 'post'],
+                    /*'update' => ['get', 'put', 'post'],
+                    'delete' => ['post', 'delete'],
+                    'batch-delete' => ['post', 'delete']*/
+                ],
+            ]
+        ];
+    }
+
     /**
      * @return string
      */
@@ -151,19 +204,22 @@ class ArticlesController extends Controller
         }
     }
 
+
     /**
      * Создание статьи
      * @return array|string|Response
      */
-/*    public function actionCreate()
+    public function actionCreate()
     {
         $model = new Articles();
+        $statusArray = Articles::getStatusArray();
         $categoryList = ArticlesCategory::getCategoryListArray();
+        $userList = User::getUserListArray();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 if ($model->save(false)) {
-                    return $this->redirect(['view', 'alias' => $model->alias]);
+                    return $this->redirect(['update', 'id' => $model->id]);
                 } else {
                     Yii::$app->session->setFlash('danger', Module::t('articles', 'Не удалось сохранить статью. Попробуйте пожалуйста еще раз!'));
                     return $this->refresh();
@@ -178,10 +234,12 @@ class ArticlesController extends Controller
             'create',
             [
                 'model' => $model,
+                'statusArray' => $statusArray,
                 'categoryList' => $categoryList,
+                'userList' => $userList
             ]
         );
-    }*/
+    }
 
     /**
      * Обновление просмотров статьи

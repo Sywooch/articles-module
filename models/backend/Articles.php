@@ -29,31 +29,6 @@ use yii\behaviors\TimestampBehavior;
 class Articles extends \alexsers\articles\models\Articles
 {
     /**
-     * Читаемый статус статьи
-     * @return mixed || null
-     */
-    public function getStatus()
-    {
-        if($statuses = self::getStatusArray()){
-            return $statuses[$this->status_id];
-        }else{
-            return null;
-        }
-    }
-
-    /**
-     * Массив статусов
-     * @return array
-     */
-    public static function getStatusArray()
-    {
-        return [
-            self::STATUS_UNPUBLISHED => Module::t('articles', 'Скрыта'),
-            self::STATUS_PUBLISHED => Module::t('articles', 'Опубликована')
-        ];
-    }
-
-    /**
      * Категория статьи
      * @return \yii\db\ActiveQuery
      */

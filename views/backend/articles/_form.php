@@ -1,7 +1,7 @@
 <?php
 
 use alexsers\articles\Module;
-use dosamigos\selectize\Selectize;
+use dosamigos\selectize\SelectizeTextInput;
 use vova07\fileapi\Widget as FileAPI;
 use vova07\imperavi\Widget as Imperavi;
 use yii\helpers\Html;
@@ -53,7 +53,11 @@ use yii\widgets\ActiveForm;
                         'minHeight' => 200,
                         'imageGetJson' => Url::to(['/articles/articles/imperavi-get']),
                         'imageUpload' => Url::to(['/articles/articles/imperavi-image-upload']),
-                        'fileUpload' => Url::to(['/articles/articles/imperavi-file-upload'])
+                        'fileUpload' => Url::to(['/articles/articles/imperavi-file-upload']),
+                        'plugins' => [
+                            'video',
+                            'table'
+                        ]
                     ]
                 ]
             ) ?>
@@ -80,8 +84,8 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 
-<?= $form->field($model, 'tagNames')->widget(Selectize::className(), [
-    'url' => ['/tag/tag/list'],
+<?= $form->field($model, 'tagNames')->widget(SelectizeTextInput::className(), [
+    'loadUrl' => ['/tag/tag/list'],
     'options' => ['class' => 'form-control'],
     'clientOptions' => [
         'plugins' => ['remove_button'],
